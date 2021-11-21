@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import { v1 } from 'uuid';
 import './App.css';
 import { TodoList } from './component/Todolist';
 
@@ -7,18 +7,25 @@ export type FilterWords = "All" | "Active" | "Completed";
 
 function App() {
   let [tasks, setTasks] = useState([
-    { id: 1, title: "HTML & CSS", isDone: true },
-    { id: 2, title: "JavaScript", isDone: true },
-    { id: 3, title: "React", isDone: false }
+    { id: v1(), title: "HTML & CSS", isDone: true },
+    { id: v1(), title: "JavaScript", isDone: true },
+    { id: v1(), title: "React", isDone: false }
   ])
-  const removeTask = (idT:number) => {
-    let filteredTasks = tasks.filter(item => item.id !==idT)
+
+  //функция удаления таски
+  const removeTask = (idT:string) => {
+    let filteredTasks = tasks.filter(item => item.id !== idT)
     setTasks(filteredTasks);
   }
-
+  // функция добавления таски
+  const addTask = () =>{
+    let newTask =  { id: v1(), title: "XXXXX", isDone: false };
+    let newTaskList = [newTask, ...tasks];
+    setTasks(newTaskList);
+  }
 
   let [filters, setFilter] = useState<FilterWords>("All")
-
+// функция переключения между выполненными и не выполненными тасками
   const fiterStatusTask = (value:FilterWords) => {
     setFilter(value)
   }
@@ -38,6 +45,7 @@ taskForTodoList = filters === 'Active' ?  tasks.filter(i => !i.isDone): filters 
         title = "What to Learn" 
         tasks = { taskForTodoList }
         remove = {removeTask}
+        add = {addTask}
         filters = {fiterStatusTask}
       />
     </div>
