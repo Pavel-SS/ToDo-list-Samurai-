@@ -18,8 +18,8 @@ function App() {
     setTasks(filteredTasks);
   }
   // функция добавления таски
-  const addTask = () =>{
-    let newTask =  { id: v1(), title: "XXXXX", isDone: false };
+  const addTask = (title:string) =>{
+    let newTask =  { id: v1(), title: title, isDone: false };
     let newTaskList = [newTask, ...tasks];
     setTasks(newTaskList);
   }
