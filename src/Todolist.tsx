@@ -75,9 +75,9 @@ return <div>
     <h3>{props.title}</h3>
     <div>
         {/* <input value={title} onChange={onChangeHandler} onKeyPress={onKeyPressHandler}/> */}
-        <br/>
         <Input name={title} onChange={onChangeHandler} onKeyPress={onKeyPressHandler}/>
-        <button onClick={addTaskHandler}>+</button>
+        {/* <button onClick={addTaskHandler}>+</button> */}
+        <ButtonComponent name={'+'} callBack={addTaskHandler} />
     </div>
     <ul>
         {
