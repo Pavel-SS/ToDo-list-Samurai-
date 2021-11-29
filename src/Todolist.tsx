@@ -71,7 +71,7 @@ export function Todolist(props: PropsType) {
                     }
                     return <li key={t.id}>
                         <input type="checkbox" checked={t.isDone} onChange={onCheckboxHandler}/>
-                        <span>{t.title}</span>
+                        <span className={t.isDone ? style.opacityTask : ''}>{t.title}</span>
                         <button onClick={ onClickHandler }>x</button>
                     </li>
                 })
