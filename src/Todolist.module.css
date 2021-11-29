@@ -9,3 +9,7 @@
 .styleButton {
     background-color: royalblue;
 }
+
+.opacityTask {
+    opacity: 0.3;
+}
