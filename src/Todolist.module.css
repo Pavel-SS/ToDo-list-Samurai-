@@ -9,3 +9,14 @@
 .styleButton {
     background-color: royalblue;
 }
+
+.opacityTask {
+    position: relative;
+    opacity: 0.6;
+    text-decoration: line-through;
+}
+
+.opacityTask::after{
+   content: '';
+    border-bottom: 2px solid red;
+}

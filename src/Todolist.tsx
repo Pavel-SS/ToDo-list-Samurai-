@@ -20,7 +20,7 @@ type PropsType = {
 export function Todolist(props: PropsType) {
 
     let [title, setTitle] = useState("")
-    const [error, setError] = useState(false)
+    const [error, setError] = useState<string | null>(null)
 
 
     const addTask = () => {
@@ -28,12 +28,12 @@ export function Todolist(props: PropsType) {
          props.addTask(title.trim());
          setTitle("");   
         }else{
-         setError(true)
+         setError('error')
         }
     }
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setError(false);
+        setError(null);
         setTitle(e.currentTarget.value)
     }
 
@@ -47,9 +47,10 @@ export function Todolist(props: PropsType) {
     const onActiveClickHandler = () => props.changeFilter("active");
     const onCompletedClickHandler = () => props.changeFilter("completed");
 
-    // const onCheckboxHandler = (event: ChangeEvent<HTMLInputElement>) =>{
-    //     props.changeStatus(event.currentTarget.checked)
-    // }
+    
+    const onCheckboxHandler = (id:string, event: ChangeEvent<HTMLInputElement>) =>{
+        props.changeStatus(id, event.currentTarget.checked)
+    }
     return <div>
         <h3>{props.title}</h3>
         <div>
@@ -59,23 +60,19 @@ export function Todolist(props: PropsType) {
                    className={error ? style.error : ''}
             />
             <button onClick={addTask}>+</button>
-            {error && <div className={style.errorMessage}>Error</div>}
+            {error && <div className={style.errorMessage}>{error}</div>}
         </div>
         <ul>
             {
                 props.tasks.map(t => {
-
                     const onClickHandler = () => props.removeTask(t.id)
-                    const onCheckboxHandler = (event: ChangeEvent<HTMLInputElement>) =>{
-                        props.changeStatus(t.id, event.currentTarget.checked)
-                    }
                     return <li key={t.id}>
-                        <input type="checkbox" checked={t.isDone} onChange={onCheckboxHandler}/>
-                        <span>{t.title}</span>
+                        <input type="checkbox" checked={t.isDone} onChange={(event: ChangeEvent<HTMLInputElement>)=> onCheckboxHandler(t.id, event)}/>
+                        <span className={t.isDone ? style.opacityTask : ''}>{t.title}</span>
                         <button onClick={ onClickHandler }>x</button>
                     </li>
                 })
-            }
+        }
         </ul>
         <div>
             <button onClick={ onAllClickHandler } className={props.filter === 'all' ? style.styleButton : '' }>All</button>
