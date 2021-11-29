@@ -14,12 +14,13 @@ type PropsType = {
     changeFilter: (value: FilterValuesType) => void
     addTask: (title: string) => void
     changeStatus:(id:string, value:boolean)=>void
+    filter: FilterValuesType
 }
 
 export function Todolist(props: PropsType) {
 
     let [title, setTitle] = useState("")
-    const [error, setError] = useState< string | null >(null)
+    const [error, setError] = useState(false)
 
 
     const addTask = () => {
@@ -27,12 +28,12 @@ export function Todolist(props: PropsType) {
          props.addTask(title.trim());
          setTitle("");   
         }else{
-         setError('Title is required')
+         setError(true)
         }
     }
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setError(null);
+        setError(false);
         setTitle(e.currentTarget.value)
     }
 
@@ -58,7 +59,7 @@ export function Todolist(props: PropsType) {
                    className={error ? style.error : ''}
             />
             <button onClick={addTask}>+</button>
-            {error && <div className={style.errorMessage}>{error}</div>}
+            {error && <div className={style.errorMessage}>Error</div>}
         </div>
         <ul>
             {
@@ -77,9 +78,9 @@ export function Todolist(props: PropsType) {
             }
         </ul>
         <div>
-            <button onClick={ onAllClickHandler }>All</button>
-            <button onClick={ onActiveClickHandler }>Active</button>
-            <button onClick={ onCompletedClickHandler }>Completed</button>
+            <button onClick={ onAllClickHandler } className={props.filter === 'all' ? style.styleButton : '' }>All</button>
+            <button onClick={ onActiveClickHandler } className={props.filter === 'active' ? style.styleButton : '' }>Active</button>
+            <button onClick={ onCompletedClickHandler } className={props.filter === 'completed' ? style.styleButton : '' }>Completed</button>
         </div>
     </div>
 }
