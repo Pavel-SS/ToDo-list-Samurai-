@@ -48,8 +48,11 @@ export function Todolist(props: PropsType) {
     const onCompletedClickHandler = () => props.changeFilter("completed");
 
     
-    const onCheckboxHandler = (id:string, event: ChangeEvent<HTMLInputElement>) =>{
-        props.changeStatus(id, event.currentTarget.checked)
+    // const onCheckboxHandler = (id:string, event: ChangeEvent<HTMLInputElement>) =>{
+    //     props.changeStatus(id, event.currentTarget.checked)
+    // }
+    const onCheckboxHandler = (id:string, event: ChangeEvent<HTMLInputElement>) => {
+       console.log(id+ " " + event.currentTarget.checked)
     }
     return <div>
         <h3>{props.title}</h3>
