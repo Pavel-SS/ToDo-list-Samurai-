@@ -24,7 +24,7 @@ export function Todolist(props: PropsType) {
 
 
     const addTask = () => {
-        if(title.trim()!== ''){
+        if(title.trim() !== ''){
          props.addTask(title.trim());
          setTitle("");   
         }else{
@@ -38,7 +38,7 @@ export function Todolist(props: PropsType) {
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.charCode === 13) {
+        if (e.code === 'Enter') {
             addTask();
         }
     }
@@ -48,12 +48,10 @@ export function Todolist(props: PropsType) {
     const onCompletedClickHandler = () => props.changeFilter("completed");
 
     
-    // const onCheckboxHandler = (id:string, event: ChangeEvent<HTMLInputElement>) =>{
-    //     props.changeStatus(id, event.currentTarget.checked)
-    // }
-    const onCheckboxHandler = (id:string, event: ChangeEvent<HTMLInputElement>) => {
-       console.log(id+ " " + event.currentTarget.checked)
+    const onCheckboxHandler = (id:string, event: ChangeEvent<HTMLInputElement>) =>{
+        props.changeStatus(id, event.currentTarget.checked)
     }
+   
     return <div>
         <h3>{props.title}</h3>
         <div>
