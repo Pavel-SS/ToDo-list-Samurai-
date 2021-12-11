@@ -41,18 +41,9 @@ function App() {
         setFilter(value);
     }
 
-    // const changeStatus = (id:string, value:boolean) => {
-    //   setTasks(tasks.map(item => item.id === id ? {...item, isDone:value} : item ))
-    // }
-
-    function changeStatus(id: string, value: boolean) {
-      let task = tasks.find(item => item.id === id)
-      if (task){
-        task.isDone = value;
-      }
-      setTasks(tasks);
+    const changeStatus = (id:string, value:boolean) => {
+      setTasks(tasks.map(item => item.id === id ? {...item, isDone:value} : item ))
     }
-
 
     return (
         <div className="App">
