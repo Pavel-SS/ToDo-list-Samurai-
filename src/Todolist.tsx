@@ -19,7 +19,7 @@ function TodoList(props: PropsType) {
     const addTask = () => {
         const trimmedTitle = title.trim()
             if(trimmedTitle){
-                props.addTask(trimmedTitle)
+                props.addTask(trimmedTitle, props.id)
             } else {
                 setError(true)
             }
@@ -34,16 +34,16 @@ function TodoList(props: PropsType) {
             addTask();
         }
     }
-    const setAllFilterValue = () =>props.changeFilter("all")
-    const setActiveFilterValue = () =>props.changeFilter("active")
-    const setCompletedFilterValue = () =>props.changeFilter("completed")
+    const setAllFilterValue = () => props.changeFilter("all", props.id)
+    const setActiveFilterValue = () => props.changeFilter("active", props.id)
+    const setCompletedFilterValue = () => props.changeFilter("completed", props.id)
     const getBtnClass = (filter: FilterValuesType) => props.filter=== filter ? "active" : "" ;
 
     const tasksJSX = props.tasks.map(task => {
         const getClasses = () => task.isDone ? "is-done": "" ;
         const changeStatus = (e: ChangeEvent<HTMLInputElement>) =>
-            props.changeTaskStatus(task.id, e.currentTarget.checked)
-        const removeTask = () => props.removeTask(task.id)
+            props.changeTaskStatus(task.id, e.currentTarget.checked, props.id)
+        const removeTask = () => props.removeTask(task.id, props.id)
         return (
             <li key={task.id} className={getClasses()}>
                 <input
