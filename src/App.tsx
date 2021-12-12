@@ -78,6 +78,19 @@ function App() {
         })
         setTasks(copyState)
     }
+    const removeTodoList = (todoListID: string) => {
+        setTodoLists(todoLists.filter(tl => tl.id !== todoListID))
+    }
+
+    const addTodoList = () => {
+        const newTodoList: TodoListType = {
+            id: v1(),
+            title: 'New Task',
+            filter: 'all'
+        }
+        setTodoLists([...todoLists, newTodoList])
+        setTasks({...tasks, [newTodoList.id]:[ ]})
+    }
 
     const getTaskForRender = (todoLists: TodoListType) => {
         switch (todoLists.filter){
@@ -105,6 +118,7 @@ function App() {
                 removeTask={removeTask}
                 changeFilter={changeFilter}
                 changeTaskStatus={changeTaskStatus}
+                removeTodoList = {removeTodoList}
             />
         )
     })
@@ -112,6 +126,7 @@ function App() {
     //UI:
     return (
         <div className="App">
+            <button onClick={addTodoList}>ADD</button>
             {todoListComponents}
         </div>
     );
