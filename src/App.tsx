@@ -27,8 +27,8 @@ type TaskStateType = {
 
 function App() {
     //BLL
-    const todoListID_1 =  v1();
-    const todoListID_2 =  v1();
+    const todoListID_1 = v1();
+    const todoListID_2 = v1();
 
     const [todoLists, setTodoLists] = useState<Array<TodoListType>>([
         {id: todoListID_1, title: "What to learn", filter: "all"},
@@ -69,6 +69,7 @@ function App() {
         }
         const copyState =  {...tasks}
         copyState[todoListID] = [newTask, ...tasks[todoListID]]
+        setTasks(copyState)
     }
     const changeTaskStatus = (taskID: string, isDone: boolean, todoListID: string) => {
         const copyState = {...tasks}
@@ -92,7 +93,7 @@ function App() {
 
     const todoListComponents = todoLists.map(tl => {
         const tasksForRender = getTaskForRender(tl)
-        
+
         return (
             <TodoList
                 key = {tl.id}
