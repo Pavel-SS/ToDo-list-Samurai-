@@ -90,15 +90,15 @@ function App() {
     const todoListComponents = todoLists.map(tl => {
         return (
             <TodoList
-            key = {tl.id}
-            id = {tl.id}
-            title={tl.title}
-            tasks={tasksForRender}
-            filter={filter}
-            addTask={addTask}
-            removeTask={removeTask}
-            changeFilter={changeFilter}
-            changeTaskStatus={changeTaskStatus}
+                key = {tl.id}
+                id = {tl.id}
+                title={tl.title}
+                tasks={tasksForRender}
+                filter={tl.filter}
+                addTask={addTask}
+                removeTask={removeTask}
+                changeFilter={changeFilter}
+                changeTaskStatus={changeTaskStatus}
             />
         )
     })
