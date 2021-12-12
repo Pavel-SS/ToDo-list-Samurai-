@@ -32,8 +32,7 @@ function App() {
 
     const [todoLists, setTodoLists] = useState<Array<TodoListType>>([
         {id: todoListID_1, title: "What to learn", filter: "all"},
-        {id: todoListID_2, title: "What to learn", filter: "all"},
-        
+        {id: todoListID_2, title: "What to learn", filter: "all"},    
     ])
 
     const [tasks, setTasks] = useState<TaskStateType>(
@@ -79,15 +78,21 @@ function App() {
         setTasks(copyState)
     }
 
-    let tasksForRender = tasks
-    if(filter === "active"){
-        tasksForRender = tasksForRender.filter(t=> t.isDone === false)
+    const getTaskForRender = (todoLists: TodoListType) => {
+        switch (todoLists.filter){
+            case 'active':
+                return tasks[todoLists.id].filter(t => !t.isDone)
+            case 'completed':
+                return tasks[todoLists.id].filter(t => t.isDone)
+            default:
+                return tasks[todoLists.id]
+        }
     }
-    if(filter === "completed"){
-        tasksForRender = tasksForRender.filter(t=> t.isDone === true)
-    }
+    
 
     const todoListComponents = todoLists.map(tl => {
+        const tasksForRender = getTaskForRender(tl)
+        
         return (
             <TodoList
                 key = {tl.id}
