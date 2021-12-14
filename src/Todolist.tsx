@@ -1,6 +1,7 @@
 import React, {ChangeEvent} from 'react';
 import {FilterValuesType, TaskType} from "./App";
-import AddItemForm from './AddItemForm'
+import AddItemForm from './AddItemForm';
+
 type PropsType = {
     id: string
     title: string
