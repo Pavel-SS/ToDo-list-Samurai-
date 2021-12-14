@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import TodoList from "./TodoList";
 import {v1} from "uuid";
+import AddItemForm from './AddItemForm';
 
 // Create
 // Read
@@ -116,6 +117,7 @@ function App() {
     return (
         <div className="App">
             {/* <button onClick={addTodo}>Add</button> */}
+            <AddItemForm addItem={addTodo}/>
             { todoListComponents }
         </div>
     );
