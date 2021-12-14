@@ -1,5 +1,6 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import React, {ChangeEvent} from 'react';
 import {FilterValuesType, TaskType} from "./App";
+import AddItemForm from './AddItemForm';
 
 type PropsType = {
     id: string
@@ -14,27 +15,11 @@ type PropsType = {
 }
 
 function TodoList(props: PropsType) {
-    const [title, setTitle] = useState<string>("")
-    const [error, setError] = useState<boolean>(false)
 
-    const addTask = () => {
-        const trimmedTitle = title.trim()
-            if(trimmedTitle){
-                props.addTask(trimmedTitle, props.id)
-            } else {
-                setError(true)
-            }
-        setTitle("")
+    const addTask = (title:string) => {
+        props.addTask(title, props.id)
     }
-    const changeTitle = (e: ChangeEvent<HTMLInputElement>) => {
-        setTitle(e.currentTarget.value)
-        setError(false)
-    }
-    const onKeyPressAddTask = (e: KeyboardEvent<HTMLInputElement>) => {
-        if(e.key === "Enter"){
-            addTask();
-        }
-    }
+    
     const setAllFilterValue = () => props.changeFilter("all", props.id)
     const setActiveFilterValue = () => props.changeFilter("active", props.id)
     const setCompletedFilterValue = () => props.changeFilter("completed", props.id)
@@ -57,25 +42,14 @@ function TodoList(props: PropsType) {
             </li>
         )
     })
-    const errorClass = error ? "error" : "" ;
-    const errorMessage = <div style={{color: "red"}}>Title is required!</div>
 
     return(
         <div>
             <h3>
                 {props.title}
-                <button onClick={() => props.removeTodoList(props.id)}>X</button>
+                <button onClick={()=>props.removeTodoList(props.id)}>x</button>
             </h3>
-            <div>
-                <input
-                    value={title}
-                    onChange={changeTitle}
-                    onKeyPress={onKeyPressAddTask}
-                    className={errorClass}
-                />
-                <button onClick={addTask}>+</button>
-                {error && errorMessage}
-            </div>
+            <AddItemForm addItem={addTask}/>
             <ul>
                 {tasksJSX}
             </ul>
