@@ -47,10 +47,8 @@ function App() {
         ],
     })
 
-    const changeFilter = (filter: FilterValuesType, todoListID: string) => {
-        const updatedTodoLists = todoLists.map(tl => tl.id === todoListID ? {...tl, filter} : tl)
-        setTodoLists(updatedTodoLists)
-    }
+    
+    //tasks
     const removeTask = (taskID: string, todoListID: string) => {
         const copyState = {...tasks}
         copyState[todoListID] = tasks[todoListID].filter(t => t.id !== taskID)
@@ -71,6 +69,7 @@ function App() {
         copyState[todoListID] = tasks[todoListID].map(t => t.id === taskID ? {...t, isDone}: t)
         setTasks(copyState)
     }
+    //TodoList
     const removeTodoList = (todoListID: string) => {
         setTodoLists(todoLists.filter(tl => tl.id !== todoListID))
     }
@@ -83,7 +82,11 @@ function App() {
       setTodoLists([...todoLists, newTodo])
       setTasks({...tasks, [newTodo.id]: []})
     }
-
+    const changeFilter = (filter: FilterValuesType, todoListID: string) => {
+        const updatedTodoLists = todoLists.map(tl => tl.id === todoListID ? {...tl, filter} : tl)
+        setTodoLists(updatedTodoLists)
+    }
+    
     const getTasksForRender = (todoList: TodoListType) => {
         switch (todoList.filter) {
             case "active":
