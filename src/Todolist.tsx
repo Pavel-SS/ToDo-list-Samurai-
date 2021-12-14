@@ -1,7 +1,7 @@
 import React, {ChangeEvent} from 'react';
 import {FilterValuesType, TaskType} from "./App";
 import AddItemForm from './AddItemForm';
-
+import EdinableSpan from './EdinableSpan'
 type PropsType = {
     id: string
     title: string
@@ -12,6 +12,8 @@ type PropsType = {
     filter: FilterValuesType
     changeTaskStatus: (taskID: string, isDone: boolean, todoListID: string) => void
     removeTodoList: (todoListID: string) => void
+    changeTaskTitle: (taskID: string, changeTitle: string, todoListID: string) => void
+    changeTodoTitle: (changeTitle: string, todoListID: string) => void
 }
 
 function TodoList(props: PropsType) {
@@ -24,12 +26,18 @@ function TodoList(props: PropsType) {
     const setActiveFilterValue = () => props.changeFilter("active", props.id)
     const setCompletedFilterValue = () => props.changeFilter("completed", props.id)
     const getBtnClass = (filter: FilterValuesType) => props.filter=== filter ? "active" : "" ;
-
+    const changeTodoListTitle = (newTitle: string) => {
+        props.changeTodoTitle(newTitle, props.id)
+    }
+    
     const tasksJSX = props.tasks.map(task => {
         const getClasses = () => task.isDone ? "is-done": "" ;
         const changeStatus = (e: ChangeEvent<HTMLInputElement>) =>
             props.changeTaskStatus(task.id, e.currentTarget.checked, props.id)
         const removeTask = () => props.removeTask(task.id, props.id)
+        const changeTaskTitle = (newTitle: string) => {
+            props.changeTaskTitle(task.id, newTitle, props.id)
+        }
         return (
             <li key={task.id} className={getClasses()}>
                 <input
@@ -37,7 +45,7 @@ function TodoList(props: PropsType) {
                     checked={task.isDone}
                     onChange={changeStatus}
                 />
-                <span>{task.title}</span>
+                <EdinableSpan title={task.title} titleChange={changeTaskTitle}/>
                 <button onClick={removeTask}>x</button>
             </li>
         )
@@ -46,7 +54,7 @@ function TodoList(props: PropsType) {
     return(
         <div>
             <h3>
-                {props.title}
+                <EdinableSpan title={props.title} titleChange={changeTodoListTitle}/>
                 <button onClick={()=>props.removeTodoList(props.id)}>x</button>
             </h3>
             <AddItemForm addItem={addTask}/>
