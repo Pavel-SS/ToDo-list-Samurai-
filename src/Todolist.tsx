@@ -2,7 +2,8 @@ import React, {ChangeEvent} from 'react';
 import {FilterValuesType, TaskType} from "./App";
 import AddItemForm from './AddItemForm';
 import EdinableSpan from './EdinableSpan';
-import {Button, ButtonGroup} from '@mui/material';
+import {Button, ButtonGroup, IconButton} from '@mui/material';
+import { Delete } from '@mui/icons-material';
 type PropsType = {
     id: string
     title: string
@@ -26,7 +27,7 @@ function TodoList(props: PropsType) {
     const setAllFilterValue = () => props.changeFilter("all", props.id)
     const setActiveFilterValue = () => props.changeFilter("active", props.id)
     const setCompletedFilterValue = () => props.changeFilter("completed", props.id)
-    const getBtnClass = (filter: FilterValuesType) => props.filter=== filter ? "active" : "" ;
+    const getBtnColor = (filter: FilterValuesType) => props.filter=== filter ? "success" : "primary" ;
     const changeTodoListTitle = (newTitle: string) => {
         props.changeTodoTitle(newTitle, props.id)
     }
@@ -56,29 +57,37 @@ function TodoList(props: PropsType) {
         <div>
             <h3>
                 <EdinableSpan title={props.title} titleChange={changeTodoListTitle}/>
-                
-                <button onClick={()=>props.removeTodoList(props.id)}>x</button>
+                <IconButton onClick={()=>props.removeTodoList(props.id)}>
+                    <Delete/>
+                </IconButton>
             </h3>
             <AddItemForm addItem={addTask}/>
             <ul>
                 {tasksJSX}
             </ul>
             <div>
-                <ButtonGroup size={'small'} 
-                variant={'contained'} 
-                color={'primary'}
-                disableElevation>
+                <ButtonGroup 
+                    size={'small'} 
+                    variant={'contained'} 
+                    color={'primary'}
+                    disableElevation>
                     
-                    <Button className={getBtnClass("all")} onClick={setAllFilterValue}>
-                        All
+                    <Button 
+                         color={getBtnColor("all")} 
+                        onClick={setAllFilterValue}>
+                            All
                     </Button>
-                    <Button className={getBtnClass("active")}
-                    onClick={setActiveFilterValue}>
-                        Active
+                    
+                    <Button 
+                         color={getBtnColor("active")}
+                        onClick={setActiveFilterValue}>
+                            Active
                     </Button>
-                    <Button className={getBtnClass("completed")}
-                    onClick={setCompletedFilterValue}>
-                        Completed
+                    
+                    <Button 
+                        color={getBtnColor("completed")}
+                        onClick={setCompletedFilterValue}>
+                            Completed
                     </Button>
                 </ButtonGroup>
             </div>
