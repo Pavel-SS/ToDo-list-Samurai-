@@ -3,7 +3,7 @@ import './App.css';
 import TodoList from "./TodoList";
 import {v1} from "uuid";
 import AddItemForm from './AddItemForm';
-
+import {Paper} from '@mui/material';
 // Create
 // Read
 // Update
@@ -110,8 +110,9 @@ function App() {
     const todoListComponents = todoLists.map(tl => {
         const taskForRender = getTasksForRender(tl)
         return (
-            <TodoList
-                key={tl.id}
+            <Paper  key={tl.id}>
+             <TodoList
+                
                 id={tl.id}
                 title={tl.title}
                 filter={tl.filter}
@@ -124,6 +125,8 @@ function App() {
                 changeTaskTitle = {changeTaskTitle}
                 changeTodoTitle = {changeTodoTitle}
             />
+            </Paper>
+            
         )
     })
 

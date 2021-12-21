@@ -1,7 +1,8 @@
 import React, {ChangeEvent} from 'react';
 import {FilterValuesType, TaskType} from "./App";
 import AddItemForm from './AddItemForm';
-import EdinableSpan from './EdinableSpan'
+import EdinableSpan from './EdinableSpan';
+import {Button, ButtonGroup} from '@mui/material';
 type PropsType = {
     id: string
     title: string
@@ -55,6 +56,7 @@ function TodoList(props: PropsType) {
         <div>
             <h3>
                 <EdinableSpan title={props.title} titleChange={changeTodoListTitle}/>
+                
                 <button onClick={()=>props.removeTodoList(props.id)}>x</button>
             </h3>
             <AddItemForm addItem={addTask}/>
@@ -62,15 +64,19 @@ function TodoList(props: PropsType) {
                 {tasksJSX}
             </ul>
             <div>
-                <button
-                    className={getBtnClass("all")}
-                    onClick={setAllFilterValue}>All</button>
-                <button
-                    className={getBtnClass("active")}
-                    onClick={setActiveFilterValue}>Active</button>
-                <button
-                    className={getBtnClass("completed")}
-                    onClick={setCompletedFilterValue}>Completed</button>
+                <ButtonGroup size={'small'} variant={'contained'} color={'primary'}>
+                    <Button className={getBtnClass("all")} onClick={setAllFilterValue}>
+                        All
+                    </Button>
+                    <Button className={getBtnClass("active")}
+                    onClick={setActiveFilterValue}>
+                        Active
+                    </Button>
+                    <Button className={getBtnClass("completed")}
+                    onClick={setCompletedFilterValue}>
+                        Completed
+                    </Button>
+                </ButtonGroup>
             </div>
         </div>
     )
