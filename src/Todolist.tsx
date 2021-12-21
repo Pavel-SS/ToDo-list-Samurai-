@@ -48,7 +48,9 @@ function TodoList(props: PropsType) {
                     onChange={changeStatus}
                 />
                 <EdinableSpan title={task.title} titleChange={changeTaskTitle}/>
-                <button onClick={removeTask}>x</button>
+                <IconButton onClick={removeTask} color={'primary'}>
+                    <Delete/>
+                </IconButton>
             </li>
         )
     })
@@ -57,7 +59,7 @@ function TodoList(props: PropsType) {
         <div>
             <h3>
                 <EdinableSpan title={props.title} titleChange={changeTodoListTitle}/>
-                <IconButton onClick={()=>props.removeTodoList(props.id)}>
+                <IconButton onClick={()=>props.removeTodoList(props.id)} color={'primary'}>
                     <Delete/>
                 </IconButton>
             </h3>
