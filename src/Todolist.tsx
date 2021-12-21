@@ -64,7 +64,11 @@ function TodoList(props: PropsType) {
                 {tasksJSX}
             </ul>
             <div>
-                <ButtonGroup size={'small'} variant={'contained'} color={'primary'}>
+                <ButtonGroup size={'small'} 
+                variant={'contained'} 
+                color={'primary'}
+                disableElevation>
+                    
                     <Button className={getBtnClass("all")} onClick={setAllFilterValue}>
                         All
                     </Button>
