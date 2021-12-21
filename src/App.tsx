@@ -110,7 +110,8 @@ function App() {
     const todoListComponents = todoLists.map(tl => {
         const taskForRender = getTasksForRender(tl)
         return (
-            <Paper  key={tl.id}>
+            <Paper  key={tl.id} elevation={8} 
+            style={{padding: '0px 20px 15px 20px'}}>
              <TodoList
                 
                 id={tl.id}
