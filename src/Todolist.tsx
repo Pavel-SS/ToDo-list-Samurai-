@@ -2,8 +2,9 @@ import React, {ChangeEvent} from 'react';
 import {FilterValuesType, TaskType} from "./App";
 import AddItemForm from './AddItemForm';
 import EdinableSpan from './EdinableSpan';
-import {Button, ButtonGroup, IconButton} from '@mui/material';
+import {Button, ButtonGroup, Checkbox, IconButton, List, ListItem} from '@mui/material';
 import { Delete } from '@mui/icons-material';
+
 type PropsType = {
     id: string
     title: string
@@ -41,17 +42,20 @@ function TodoList(props: PropsType) {
             props.changeTaskTitle(task.id, newTitle, props.id)
         }
         return (
-            <li key={task.id} className={getClasses()}>
-                <input
-                    type="checkbox"
-                    checked={task.isDone}
-                    onChange={changeStatus}
-                />
-                <EdinableSpan title={task.title} titleChange={changeTaskTitle}/>
-                <IconButton onClick={removeTask} color={'primary'}>
-                    <Delete/>
-                </IconButton>
-            </li>
+
+        <ListItem key={task.id} className={getClasses()} divider style={{
+                display: 'flex',
+                justifyContent: 'space-between'
+                }}>
+            
+            <Checkbox checked={task.isDone} onChange={changeStatus} size={'small'} color={'primary'}/>
+            
+            <EdinableSpan title={task.title} titleChange={changeTaskTitle}/>
+            
+            <IconButton onClick={removeTask} color={'primary'}>
+                <Delete />
+            </IconButton>
+        </ListItem>
         )
     })
 
@@ -64,9 +68,9 @@ function TodoList(props: PropsType) {
                 </IconButton>
             </h3>
             <AddItemForm addItem={addTask}/>
-            <ul>
+            <List>
                 {tasksJSX}
-            </ul>
+            </List>
             <div>
                 <ButtonGroup 
                     size={'small'} 
