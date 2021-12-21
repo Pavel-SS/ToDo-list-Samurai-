@@ -4,6 +4,7 @@ import React, {useState, ChangeEvent} from "react";
 type EdinableSpanPropsType ={
     title: string
     titleChange: (newTitle: string) => void
+
 }
 const EdinableSpan = (props: EdinableSpanPropsType) => {
     const [editMode, setEditMode] = useState<boolean>(false)
@@ -21,7 +22,7 @@ const EdinableSpan = (props: EdinableSpanPropsType) => {
     return(
         editMode 
         ? <input value ={title} autoFocus={true} onBlur={offEditeMode} onChange={changeTitle}/>
-        : <span onDoubleClick={onEditeMode}>{props.title}</span>
+        : <span  onDoubleClick={onEditeMode}>{props.title}</span>
     )
 }
 

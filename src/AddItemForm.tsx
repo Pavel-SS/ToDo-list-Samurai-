@@ -1,5 +1,6 @@
+import { IconButton } from "@mui/material";
 import React, {useState, KeyboardEvent, ChangeEvent} from "react";
-
+import ControlPointIcon from '@mui/icons-material/ControlPoint';
 type AddItemFormPropsType = {
     addItem: (title: string) => void
 }
@@ -40,7 +41,7 @@ const AddItemForm = (props: AddItemFormPropsType) => {
             onKeyPress={onKeyPressAddItem}
             className={errorClass}
         />
-        <button onClick={addItem}>+</button>
+        <IconButton onClick={addItem}><ControlPointIcon/></IconButton>
         {error && errorMessage}
     </div>
     )
