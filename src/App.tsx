@@ -3,7 +3,8 @@ import './App.css';
 import TodoList from "./TodoList";
 import {v1} from "uuid";
 import AddItemForm from './AddItemForm';
-import { Paper } from '@mui/material';
+import { AppBar, IconButton, Paper, Toolbar, Typography, Button } from '@mui/material';
+import { Menu } from '@mui/icons-material';
 
 // Create
 // Read
@@ -132,7 +133,17 @@ function App() {
     //UI:
     return (
         <div className="App">
-            {/* <button onClick={addTodo}>Add</button> */}
+            <AppBar position='static'>
+                <Toolbar style={{justifyContent:"space-between"}}>
+                    <IconButton edge="start" color="inherit" aria-label="menu">
+                        <Menu/>
+                    </IconButton>
+                    <Typography variant='h6'>
+                        TodoLists
+                    </Typography>
+                    <Button color="inherit" variant={"outlined"}>Login</Button>
+                </Toolbar>
+            </AppBar>
             <AddItemForm addItem={addTodo}/>
             { todoListComponents }
         </div>
