@@ -9,11 +9,13 @@
 
 .is-done {
   opacity: 0.5;
+  text-decoration: line-through;
 }
 .active {
   background-color: cadetblue;
 }
 .error {
   outline: none;
-  border: 2px solid red;
+  border: 2px solid #2e51ee93;
+  
 }
