@@ -112,21 +112,15 @@ function App() {
     const todoListComponents = todoLists.map(tl => {
         const taskForRender = getTasksForRender(tl)
         return (
-            <Paper key={tl.id}  elevation={13} sx={{padding: '20px'}}> 
-                <TodoList
-                id={tl.id}
-                title={tl.title}
-                filter={tl.filter}
-                tasks={taskForRender}
-                addTask={addTask}
-                removeTask={removeTask}
-                changeFilter={changeFilter}
-                changeTaskStatus={changeTaskStatus}
-                removeTodoList={removeTodoList}
-                changeTaskTitle = {changeTaskTitle}
-                changeTodoTitle = {changeTodoTitle}
-            />
-            </Paper>
+            <Grid key={tl.id} item>
+                <Paper elevation={13} sx={{padding: '20px'}}>
+                    <TodoList id={tl.id} title={tl.title} filter={tl.filter} tasks={taskForRender} addTask={addTask}
+                        removeTask={removeTask} changeFilter={changeFilter} changeTaskStatus={changeTaskStatus}
+                        removeTodoList={removeTodoList} changeTaskTitle={changeTaskTitle}
+                        changeTodoTitle={changeTodoTitle} />
+                </Paper>
+            </Grid>
+            
         )
     })
 
@@ -145,10 +139,14 @@ function App() {
                 </Toolbar>
             </AppBar>
             <Container fixed>
-                <Grid container>
+                <Grid container
+                    sx={{padding:'20px 0'}}
+                >
                     <AddItemForm addItem={addTodo}/>
                 </Grid>
-                <Grid container>
+                <Grid container
+                    spacing={5}
+                >
                     { todoListComponents } 
                 </Grid>
                  
