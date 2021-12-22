@@ -3,7 +3,7 @@ import './App.css';
 import TodoList from "./TodoList";
 import {v1} from "uuid";
 import AddItemForm from './AddItemForm';
-import { AppBar, IconButton, Paper, Toolbar, Typography, Button } from '@mui/material';
+import { AppBar, IconButton, Paper, Toolbar, Typography, Button, Container, Grid } from '@mui/material';
 import { Menu } from '@mui/icons-material';
 
 // Create
@@ -144,8 +144,15 @@ function App() {
                     <Button color="inherit" variant={"outlined"}>Login</Button>
                 </Toolbar>
             </AppBar>
-            <AddItemForm addItem={addTodo}/>
-            { todoListComponents }
+            <Container fixed>
+                <Grid container>
+                    <AddItemForm addItem={addTodo}/>
+                </Grid>
+                <Grid container>
+                    { todoListComponents } 
+                </Grid>
+                 
+            </Container>
         </div>
     );
 }
