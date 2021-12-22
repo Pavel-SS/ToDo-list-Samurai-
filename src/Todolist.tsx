@@ -1,10 +1,9 @@
 import React, {ChangeEvent} from 'react';
 import {FilterValuesType, TaskType} from "./App";
 import AddItemForm from './AddItemForm';
-import EdinableSpan from './EdinableSpan';
-import {Button, ButtonGroup, Checkbox, IconButton, List, ListItem} from '@mui/material';
+import EdinableSpan from './EdinableSpan'
+import { Button, ButtonGroup, Checkbox, IconButton, List, ListItem, Typography } from '@mui/material';
 import { Delete } from '@mui/icons-material';
-
 type PropsType = {
     id: string
     title: string
@@ -28,7 +27,8 @@ function TodoList(props: PropsType) {
     const setAllFilterValue = () => props.changeFilter("all", props.id)
     const setActiveFilterValue = () => props.changeFilter("active", props.id)
     const setCompletedFilterValue = () => props.changeFilter("completed", props.id)
-    const getBtnColor = (filter: FilterValuesType) => props.filter=== filter ? "success" : "primary" ;
+    // const getBtnClass = (filter: FilterValuesType) => props.filter=== filter ? "active" : "" ;
+    const getBtnColor = (filter: FilterValuesType) => props.filter=== filter ? "#72e0ab" : "#1d5f6e" ;
     const changeTodoListTitle = (newTitle: string) => {
         props.changeTodoTitle(newTitle, props.id)
     }
@@ -42,58 +42,68 @@ function TodoList(props: PropsType) {
             props.changeTaskTitle(task.id, newTitle, props.id)
         }
         return (
+            <ListItem key={task.id} 
+                divider 
+                disableGutters
+                sx={{display: 'flex',
+                    justifyContent: 'space-between',
+                    }}>
+                <Checkbox color={'primary'} 
+                    checked={task.isDone}
+                    onChange={changeStatus}
+                />
 
-        <ListItem key={task.id} className={getClasses()} divider style={{
-                display: 'flex',
-                justifyContent: 'space-between'
-                }}>
-            
-            <Checkbox checked={task.isDone} onChange={changeStatus} size={'small'} color={'primary'}/>
-            
-            <EdinableSpan title={task.title} titleChange={changeTaskTitle}/>
-            
-            <IconButton onClick={removeTask} color={'primary'}>
-                <Delete />
-            </IconButton>
-        </ListItem>
+                <EdinableSpan title={task.title} titleChange={changeTaskTitle} classSpan={getClasses()}/>
+                <IconButton onClick={removeTask} sx={{color: '#1d5f6e'}}>
+                    <Delete/>
+                </IconButton>
+            </ListItem>
         )
     })
 
     return(
-        <div>
-            <h3>
-                <EdinableSpan title={props.title} titleChange={changeTodoListTitle}/>
-                <IconButton onClick={()=>props.removeTodoList(props.id)} color={'primary'}>
-                    <Delete/>
-                </IconButton>
-            </h3>
-            <AddItemForm addItem={addTask}/>
+        <div
+            style={{display:'flex',
+                justifyContent:'space-between',
+                flexDirection:'column',
+                minHeight:'300px',
+                maxWidth:'223px'    
+            }}    
+        >
+            <div>
+                <Typography variant={'h6'} sx={{fontWeight: 700,
+                    display:'flex',
+                    justifyContent:'space-around' 
+                }}>
+                    <EdinableSpan title={props.title} titleChange={changeTodoListTitle}/>
+                    <IconButton onClick={()=>props.removeTodoList(props.id)}
+                        sx={{color: '#1d5f6e'}}>
+                        <Delete />
+                    </IconButton>
+                </Typography>
+                <AddItemForm addItem={addTask} />
+            </div>
+            
             <List>
                 {tasksJSX}
             </List>
             <div>
-                <ButtonGroup 
-                    size={'small'} 
-                    variant={'contained'} 
-                    color={'primary'}
-                    disableElevation>
-                    
-                    <Button 
-                         color={getBtnColor("all")} 
-                        onClick={setAllFilterValue}>
-                            All
+                <ButtonGroup variant="contained"  color={'info'} size={'small'} aria-label="outlined primary button group" disableElevation>
+                    <Button
+                        //  color={getBtnColor("all")}
+                         sx={{background: getBtnColor("all"), fontWeight: 700}}
+                         onClick={setAllFilterValue}>
+                             All
                     </Button>
-                    
-                    <Button 
-                         color={getBtnColor("active")}
-                        onClick={setActiveFilterValue}>
-                            Active
+                    <Button
+                         sx={{background: getBtnColor("active"), fontWeight: 700}}
+                         onClick={setActiveFilterValue}>
+                             Active
                     </Button>
-                    
                     <Button 
-                        color={getBtnColor("completed")}
-                        onClick={setCompletedFilterValue}>
-                            Completed
+                         sx={{background: getBtnColor("completed"), fontWeight: 700}}
+                         onClick={setCompletedFilterValue}>
+                        Completed
                     </Button>
                 </ButtonGroup>
             </div>
