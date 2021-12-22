@@ -1,6 +1,7 @@
-import { IconButton } from "@mui/material";
 import React, {useState, KeyboardEvent, ChangeEvent} from "react";
-import ControlPointIcon from '@mui/icons-material/ControlPoint';
+import AddBoxRoundedIcon from '@mui/icons-material/AddBoxRounded';
+import { IconButton, TextField } from "@mui/material";
+
 type AddItemFormPropsType = {
     addItem: (title: string) => void
 }
@@ -30,19 +31,25 @@ const AddItemForm = (props: AddItemFormPropsType) => {
         }
     }
 
-    const errorClass = error ? "error" : "" ;
-    const errorMessage = <div style={{color: "red"}}>Title is required!</div>
 
     return (
         <div>
-        <input
+        <TextField
             value={title}
             onChange={changeTitle}
             onKeyPress={onKeyPressAddItem}
-            className={errorClass}
+            variant={'outlined'}
+            label={'Title'}
+            size={'small'}
+            sx={{
+                maxWidth:'calc(100% - 50px)'
+            }}
+            error={error}
+            helperText={error && 'Title is required!'}
         />
-        <IconButton onClick={addItem}><ControlPointIcon/></IconButton>
-        {error && errorMessage}
+        <IconButton onClick={addItem} sx={{color:'#0288d1'}}>
+            <AddBoxRoundedIcon/>
+        </IconButton>
     </div>
     )
 }
