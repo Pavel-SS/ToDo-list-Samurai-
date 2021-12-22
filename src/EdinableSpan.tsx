@@ -1,10 +1,11 @@
+import { TextField } from "@mui/material";
 import React, {useState, ChangeEvent} from "react";
 
 
 type EdinableSpanPropsType ={
     title: string
     titleChange: (newTitle: string) => void
-
+    classSpan?: string
 }
 const EdinableSpan = (props: EdinableSpanPropsType) => {
     const [editMode, setEditMode] = useState<boolean>(false)
@@ -21,8 +22,15 @@ const EdinableSpan = (props: EdinableSpanPropsType) => {
     }
     return(
         editMode 
-        ? <input value ={title} autoFocus={true} onBlur={offEditeMode} onChange={changeTitle}/>
-        : <span  onDoubleClick={onEditeMode}>{props.title}</span>
+        ? <TextField value ={title}
+            autoFocus={true} 
+            onBlur={offEditeMode}
+            onChange={changeTitle}
+            fullWidth
+          />
+        : <div onDoubleClick={onEditeMode} className={props.classSpan}>
+            {props.title}
+          </div>
     )
 }
 
