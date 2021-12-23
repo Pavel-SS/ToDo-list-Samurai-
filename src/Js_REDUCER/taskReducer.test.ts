@@ -1,4 +1,4 @@
-import {sum,sub,mult,divider} from './taskReducer';
+import {sum,sub,mult,divider, salaryReducer} from './taskReducer';
 test('sum', ()=>{
     //1. тестовые данные
     const a: number = 570,
@@ -34,5 +34,13 @@ test('divider', ()=>{
         result = divider(a,b)
     //3. проверка ожидаемого результата
     expect(result).toBe(2);
+
+})
+
+test('reducer', ()=>{
+    //1. тестовые данные
+    //2. выполнение тестируемого кода
+    //3. проверка ожидаемого результата
+    expect(salaryReducer(570,{type:'sum', payload: 330})).toBe(900);
 
 })
