@@ -24,7 +24,7 @@ export type ActionType = {
     payload: number
 }
 
-export const actionCreator = (type:string, payload:number)=> ({
+export const multAC = (type:'mult',payload:number)=> ({
     type,
     payload
 })
@@ -33,6 +33,12 @@ export const salaryReducer = (state: number, action: ActionType): number => {
     switch(action.type){
         case 'sum':
             return state + action.payload
+        case 'sub':
+            return state - action.payload
+        case 'mult':
+            return state * action.payload
+        case 'divider':
+            return state / action.payload
         default:
             return state
     }
