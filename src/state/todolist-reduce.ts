@@ -11,6 +11,7 @@ export const todoListsReducer = (state: Array<TodoListType>, action: ActionType)
     switch (action.type){
         case 'REMOVE-TODOLIST':{ 
             return state.filter(t => t.id !== action.id)
+        
         }
         case 'ADD-TODOLIST':{ 
             return [...state, {
@@ -18,11 +19,16 @@ export const todoListsReducer = (state: Array<TodoListType>, action: ActionType)
                 title: action.title,
                 filter: "all"
             }]
+        
         }
         case 'CHANGE-TODOLIST-TITLE': {
            return state.map(tl => tl.id === action.id ? action : tl);
         }
-        
+
+        case 'CHANGE-TODOLIST-FILTER': {
+            return state.map(tl => tl.id === action.id ? action : tl);
+        }
+
         default:
             throw new Error ('Id')
     }
