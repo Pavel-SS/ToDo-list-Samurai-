@@ -19,6 +19,10 @@ export const todoListsReducer = (state: Array<TodoListType>, action: ActionType)
                 filter: "all"
             }]
         }
+        case 'CHANGE-TODOLIST-TITLE': {
+           return state.map(tl => tl.id === action.id ? action : tl);
+        }
+        
         default:
             throw new Error ('Id')
     }
