@@ -25,3 +25,5 @@ yarn-error.log*
 
 #File
 /FileSRC
+src/Bsasic_js/lesson_8.test.ts
+src/Bsasic_js/lesson_8.ts
