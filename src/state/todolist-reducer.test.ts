@@ -20,7 +20,7 @@ test ('correct todolist should be removed', () => {
 test ('correct todolist should be add', () => {
     const todoListID_1 = v1();
     const todoListID_2 = v1();
-     const newTodolistTitle = 'New TodoList' 
+    const newTodolistTitle = 'New TodoList' 
     const startState: Array<TodoListType> = [
         {id: todoListID_1, title: "What to learn", filter: "all"},
         {id: todoListID_2, title: "What to buy", filter: "all"},
