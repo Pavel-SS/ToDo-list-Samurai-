@@ -1,7 +1,7 @@
 import { v1 } from 'uuid';
 import { TodoListType, FilterValuesType } from '../App';
 
-type RemoveTodoListActionType = {
+export type RemoveTodoListActionType = {
     type: 'REMOVE-TODOLIST';
     id: string
 }
@@ -29,7 +29,7 @@ export const todoListsReducer = (state: Array<TodoListType>, action: ActionType)
         }
         case 'ADD-TODOLIST': { 
             return [...state, {
-                id: v1(),
+                id: action.ID,
                 title: action.title,
                 filter: "all"
             }]
