@@ -42,7 +42,7 @@ export const tasksReducer = (state: TaskStateType, action: ActionType) => {
             return {...state, [action.todolistID]: state[action.todolistID].map(task => task.id === action.taskID ? {...task, title: action.title}: task)}
         case 'ADD-TODOLIST':
             const stateCopy = {...state};
-                stateCopy[v1()] = [];
+                stateCopy[action.ID] = [];
             return stateCopy;
         default:
             throw new Error ("I don't understand this type")
