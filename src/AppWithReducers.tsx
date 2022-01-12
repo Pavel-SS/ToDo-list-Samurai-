@@ -1,5 +1,4 @@
-import React, {useReducer, useState} from 'react';
-import './App.css';
+import React, {useReducer} from 'react';
 import {TaskType, Todolist} from './Todolist';
 import {v1} from 'uuid';
 import {AddItemForm} from './AddItemForm';
