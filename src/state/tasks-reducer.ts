@@ -1,4 +1,4 @@
-import {FilterValuesType, TasksStateType, TodolistType} from '../App';
+import {TasksStateType} from '../App';
 import {v1} from 'uuid';
 import {AddTodolistActionType, RemoveTodolistActionType} from './todolists-reducer';
 
@@ -83,7 +83,16 @@ export const tasksReducer = (state: TasksStateType, action: ActionsType): TasksS
             return stateCopy;
         }
         default:
-            throw new Error("I don't understand this type")
+            //Работает для React Reducer
+            // throw new Error("I don't understand this type")
+            
+            // Работает для Redux т.к. в  Redux все Reducer-ы объединены 
+            // rootReducer. А rootReducer не знает какому reducer-у 
+            // предназначается  action , поэтому он просто их расскидывает для 
+            // каждого и задача каждого  reducer-a пройтись  по своему switch 
+            // case. И если он не найдет совпадений. Reducer решает что action не 
+            // его  и он возвращает  state без изменений
+            return state
     }
 }
 
