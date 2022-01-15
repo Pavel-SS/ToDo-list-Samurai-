@@ -1,4 +1,3 @@
-import React from 'react';
 import {TaskType, Todolist} from './Todolist';
 import {AddItemForm} from './AddItemForm';
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from '@mui/material';

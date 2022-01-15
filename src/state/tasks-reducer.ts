@@ -1,4 +1,4 @@
-import {TasksStateType} from '../App';
+import {TasksStateType} from '../AppWithRedux';
 import {v1} from 'uuid';
 import { AddTodolistActionType, RemoveTodolistActionType } from './todolists-reducer';
 
@@ -48,6 +48,10 @@ export const tasksReducer = (state: TasksStateType = initialState, action: Actio
             const newTasks = [newTask, ...tasks];
             stateCopy[action.todolistId] = newTasks;
             return stateCopy;
+            //короткий вариант записи
+            // return {
+            //     ...state, 
+            //     [action.todolistId]: [{id: v1(), title: action.title, isDone: false}, ...state[action.todolistId]]};
         }
         case 'CHANGE-TASK-STATUS': {
             const stateCopy = {...state};
