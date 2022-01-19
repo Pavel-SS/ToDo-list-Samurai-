@@ -45,7 +45,7 @@ export const todolistsReducer = (state: Array<TodolistType> = initialState, acti
                 // если нашёлся - изменим ему заголовок
                 todolist.filter = action.filter;
             }
-            return [...state];
+            return state.map(t => t.id === action.id ? {...t, filter: action.filter}: t);
         }
         default:
            return state;
