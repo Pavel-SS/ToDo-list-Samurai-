@@ -1,3 +1,5 @@
+const { Page } = require("puppeteer");
+
 describe('addItemForm', () => {
     it('base example, visually looks correct', async () => {
         await page.setDefaultNavigationTimeout(0);
