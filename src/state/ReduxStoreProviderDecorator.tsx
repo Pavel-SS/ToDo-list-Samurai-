@@ -16,6 +16,8 @@ const rootReducer = combineReducers({
         {id: "todolistId2", title: "What to buy", filter: "all"}
     ] ,
     tasks: {
+
+        
         ["todolistId1"]: [
             {id: '1', title: "HTML&CSS", isDone: true},
             {id: '2', title: "JS", isDone: true}
