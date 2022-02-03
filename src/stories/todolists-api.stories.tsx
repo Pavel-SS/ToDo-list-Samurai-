@@ -28,13 +28,17 @@ export const CreateTodolist = () => {
 
    return <div> {JSON.stringify(state)}</div>
 }
-// export const DeleteTodolist = () => {
-//    const [state, setState] = useState<any>(null)
-//    useEffect(() => {
-//    }, [])
+export const DeleteTodolist = () => {
+   const [state, setState] = useState<any>(null)
+   const todolistId = '144a24bd-fe49-459d-9e05-cd1c6ef8c34a'
+   useEffect(() => {
+    todolistAPI.deleteTodos(todolistId).then((res)=>{
+        setState(res.data)
+    })
+   }, [])
 
-//    return <div> {JSON.stringify(state)}</div>
-// }
+   return <div> {JSON.stringify(state)}</div>
+}
 // export const UpdateTodolistTitle = () => {
 //    const [state, setState] = useState<any>(null)
 //    useEffect(() => {
