@@ -12,6 +12,11 @@ export const todolistAPI = {
     getTodos(){
         const promise = axios.get(`https://social-network.samuraijs.com/api/1.1/todo-lists`, settings)
         return promise
+    },
+
+    createTodos(title:string){
+        const promise = axios.post(`https://social-network.samuraijs.com/api/1.1/todo-lists`, title ,settings)
+        return promise
     }
 //    updateTodolist(todolistId: string, title: string) {
 //        const promise = axios.put(`https://social-network.samuraijs.com/api/1.1/todo-lists/${todolistId}`, {title: title}, settings)
