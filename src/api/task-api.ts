@@ -21,7 +21,7 @@ export type GetTaskResponseType = {
 }
 export type PostTaskResponseType <T = {}> = {
     resultCode: number
-    messages: ['Something wrong'],
+    messages: Array<string>,
     data: {
         item: T
     }
@@ -44,10 +44,12 @@ export const taskAPI  = {
         CreatedBaseTaskResType,
         AxiosResponse<CreatedBaseTaskResType>,
         {title:string}
-        >(`/todo-lists/${todolistId}/tasks`)        
+        >(`/todo-lists/${todolistId}/tasks`, {title})        
     },
     deleteTask:(todolistId: string, taskId: string)=>{
         return instance.delete<BaseResponseTodoType>(`/todo-lists/${todolistId}/tasks/${taskId}`)
     },
-    updateTask:()=>{}
+    updateTask:(todolistId: string, taskId: string, title: string)=>{
+        return instance.put<BaseResponseTodoType>(`/todo-lists/${todolistId}/tasks/${taskId}`, {title})
+    }
 }
