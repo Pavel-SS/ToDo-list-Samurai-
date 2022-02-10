@@ -22,7 +22,7 @@ import {
 import { addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC } from './state/tasks-reducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppRootStateType } from './state/store';
-import { TaskStatuses, TaskType } from './api/todolists-api'
+import { TaskStatuses, TaskType, todolistsAPI } from './api/todolists-api'
 
 
 export type TasksStateType = {
@@ -75,6 +75,12 @@ function App() {
         const action = addTodolistAC(title);
         dispatch(action);
     }, [dispatch]);
+
+    // useEffect(()=>{
+    //     todolistsAPI.getTodolists.then(res=>{
+    //         dispatch(setTodo)
+    //     })
+    // },[])
 
     return (
         <div className="App">
