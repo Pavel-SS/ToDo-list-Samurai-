@@ -17,6 +17,7 @@ import {
     changeTodolistTitleAC,
     FilterValuesType,
     removeTodolistAC,
+    setTodosAC,
     TodolistDomainType
 } from './state/todolists-reducer'
 import { addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC } from './state/tasks-reducer';
@@ -31,10 +32,11 @@ export type TasksStateType = {
 
 
 function App() {
-
+ 
     useEffect(()=>{
         todolistsAPI.getTodolists().then((res)=>{
-            
+           let todos = res.data
+           dispatch(setTodosAC(todos))
         })
     },[])
 
@@ -102,6 +104,7 @@ function App() {
                 <Grid container spacing={3}>
                     {
                         todolists.map(tl => {
+
                             let allTodolistTasks = tasks[tl.id];
 
                             return <Grid item key={tl.id}>
