@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import './App.css';
 import { Todolist } from './Todolist';
 import { AddItemForm } from './AddItemForm';
@@ -31,6 +31,12 @@ export type TasksStateType = {
 
 
 function App() {
+
+    useEffect(()=>{
+        todolistsAPI.getTodolists().then((res)=>{
+            
+        })
+    },[])
 
     const todolists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolists)
     const tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
@@ -75,12 +81,6 @@ function App() {
         const action = addTodolistAC(title);
         dispatch(action);
     }, [dispatch]);
-
-    // useEffect(()=>{
-    //     todolistsAPI.getTodolists.then(res=>{
-    //         dispatch(setTodo)
-    //     })
-    // },[])
 
     return (
         <div className="App">
