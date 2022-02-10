@@ -83,3 +83,4 @@ export const changeTodolistFilterAC = (id: string, filter: FilterValuesType): Ch
     return {type: 'CHANGE-TODOLIST-FILTER', id: id, filter: filter}
 }
 
+// export const setTodolistAC = (todolist: TodolistDomainType)
