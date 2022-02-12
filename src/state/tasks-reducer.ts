@@ -157,22 +157,16 @@ export const setTasksAC = (task: TaskType[], todolistId: string) => {
 
 export const setTasksTC = (todolistId: string)=> (dispatch: Dispatch)=>{
         todolistsAPI.getTasks(todolistId).then(res=>{
-            const tasks = res.data.items; 
+            let tasks = res.data.items; 
             dispatch(setTasksAC(tasks, todolistId))
         })
     }
 
 
-export const removeTaskTC = (taskId: string, todolistId: string) => 
+export const deleteTaskTC = (todolistId: string, taskId: string) => 
     (dispatch: Dispatch) => {
-        todolistsAPI.deleteTask(todolistId,taskId).then((res)=>{
-            const a = removeTaskAC(taskId, todolistId);
-            dispatch(a)
+        todolistsAPI.deleteTask(todolistId, taskId).then((res)=>{
+            debugger
+            dispatch(removeTaskAC(taskId, todolistId))
         })    
     }
-
-export const addTaskTC = (todolistId: string, title: string) => (dispatch: Dispatch) => {
-    todolistsAPI.createTask(todolistId, title).then((res)=>{
-        debugger
-    })
-}
