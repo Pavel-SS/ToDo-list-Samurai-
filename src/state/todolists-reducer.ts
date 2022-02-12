@@ -1,5 +1,8 @@
+import { Dispatch } from 'redux';
+import { todolistsAPI } from './../api/todolists-api';
 import { v1 } from 'uuid';
 import { TodolistType } from '../api/todolists-api'
+import { AppRootStateType } from './store';
 
 export type RemoveTodolistActionType = {
     type: 'REMOVE-TODOLIST',
@@ -95,4 +98,22 @@ export const changeTodolistFilterAC = (id: string, filter: FilterValuesType): Ch
 
 export const setTodosAC = (todolists: TodolistType[]) => {
     return {type:'SET-TODOS', todolists} as const
+}
+
+//THUNK
+// функция
+// первым параметром принимает dispatch
+//вторым параметром принимает фунецию getState. Т.е. функцию которая возвращает стэйт всего приложения
+export  const setTodosTC= () => (dispatch: Dispatch): void => {
+    //В санке делают две вещи
+    //1.Side Effect
+    //2.Dispatch action
+    
+    //1.Side Effect
+    todolistsAPI.getTodolists().then((res)=>{
+        let todos = res.data
+
+    //2.Dispatch action
+        dispatch(setTodosAC(todos))
+     })
 }
