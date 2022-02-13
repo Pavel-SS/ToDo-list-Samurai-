@@ -17,11 +17,12 @@ import {
     changeTodolistTitleAC,
     FilterValuesType,
     removeTodolistAC,
+    TodolistDomainType,
     setTodosAC,
-    setTodosTC,
-    TodolistDomainType
+    setTodoTC
+
 } from './state/todolists-reducer'
-import { addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, deleteTaskTC } from './state/tasks-reducer';
+import { addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, addTaskTC, removeTaskTC } from './state/tasks-reducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppRootStateType } from './state/store';
 import { TaskStatuses, TaskType, todolistsAPI } from './api/todolists-api'
@@ -33,21 +34,26 @@ export type TasksStateType = {
 
 
 function App() {
- 
+
     useEffect(()=>{
-        dispatch(setTodosTC())
+        debugger
+        todolistsAPI.getTodolists().then((res)=>{
+            debugger
+            dispatch(setTodoTC())
+        })
     },[])
 
     const todolists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolists)
     const tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
     const dispatch = useDispatch();
 
-    const removeTask = useCallback(function (todolistId: string, id: string) {
-        dispatch(deleteTaskTC(todolistId, id));
+    const removeTask = useCallback(function (id: string, todolistId: string) {
+            const thunk = removeTaskTC(todolistId, id)
+            dispatch(thunk);      
     }, []);
 
     const addTask = useCallback(function (title: string, todolistId: string) {
-        const thunk = addTaskAC(title,todolistId);
+        const thunk = addTaskTC(todolistId, title);
         dispatch(thunk);
     }, []);
 
@@ -101,7 +107,6 @@ function App() {
                 <Grid container spacing={3}>
                     {
                         todolists.map(tl => {
-
                             let allTodolistTasks = tasks[tl.id];
 
                             return <Grid item key={tl.id}>
