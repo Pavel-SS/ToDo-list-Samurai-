@@ -1,8 +1,7 @@
-import { Dispatch } from 'redux';
 import { todolistsAPI } from './../api/todolists-api';
+import { Dispatch } from 'redux';
 import { v1 } from 'uuid';
 import { TodolistType } from '../api/todolists-api'
-import { AppRootStateType } from './store';
 
 export type RemoveTodolistActionType = {
     type: 'REMOVE-TODOLIST',
@@ -24,13 +23,10 @@ export type ChangeTodolistFilterActionType = {
     filter: FilterValuesType
 }
 export type SetTodosActionType = ReturnType<typeof setTodosAC>
-
 type ActionsType = RemoveTodolistActionType | AddTodolistActionType
     | ChangeTodolistTitleActionType
     | ChangeTodolistFilterActionType
     | SetTodosActionType
-
-
 
 const initialState: Array<TodolistDomainType> = [
     /*{id: todolistId1, title: 'What to learn', filter: 'all', addedDate: '', order: 0},
@@ -44,10 +40,11 @@ export type TodolistDomainType = TodolistType & {
 
 export const todolistsReducer = (state: Array<TodolistDomainType> = initialState, action: ActionsType): Array<TodolistDomainType> => {
     switch (action.type) {
-        case 'SET-TODOS': {
-            return action.todolists.map(todolist=>{
-                return{...todolist, filter:'all'}
-            })
+        case 'SET-TODO': {
+            return action.todolist.map(tl=>({
+                ...tl,
+                filter:'all'
+            }))
         }
 
         case 'REMOVE-TODOLIST': {
@@ -96,24 +93,14 @@ export const changeTodolistFilterAC = (id: string, filter: FilterValuesType): Ch
     return {type: 'CHANGE-TODOLIST-FILTER', id: id, filter: filter}
 }
 
-export const setTodosAC = (todolists: TodolistType[]) => {
-    return {type:'SET-TODOS', todolists} as const
+export  const setTodosAC =  (todolist:TodolistType[]) => {
+    return {
+        type: 'SET-TODO', todolist
+    } as const
 }
 
-//THUNK
-// функция
-// первым параметром принимает dispatch
-//вторым параметром принимает фунецию getState. Т.е. функцию которая возвращает стэйт всего приложения
-export  const setTodosTC= () => (dispatch: Dispatch): void => {
-    //В санке делают две вещи
-    //1.Side Effect
-    //2.Dispatch action
-    
-    //1.Side Effect
-    todolistsAPI.getTodolists().then((res)=>{
-        let todos = res.data
-
-    //2.Dispatch action
-        dispatch(setTodosAC(todos))
-     })
+export const setTodoTC = () => (dispatch: Dispatch) => {
+    todolistsAPI.getTodolists().then(res => {
+        dispatch(setTodosAC(res.data))
+    })
 }
