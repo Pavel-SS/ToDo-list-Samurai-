@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { AppRootStateType, useAppSelector } from '../../app/store'
+import { AppRootStateType } from '../../app/store'
 import {
     addTodolistTC,
     changeTodolistFilterAC,
@@ -17,7 +17,6 @@ import { Todolist } from './Todolist/Todolist'
 
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import { RequestStatusType } from '../../app/app-reducer'
 
 export const TodolistsList: React.FC = () => {
 
@@ -70,6 +69,7 @@ export const TodolistsList: React.FC = () => {
         const thunk = addTodolistTC(title)
         dispatch(thunk)
     }, [dispatch])
+
 
     return <>
         <Grid container style={{padding: '20px'}}>
