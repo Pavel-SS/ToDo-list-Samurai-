@@ -29,6 +29,11 @@ export const Login = () => {
             } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
                 errors.email = 'Invalid email address';
             }
+            if(!values.password){
+                errors.password = 'Required!';
+            }else if(values.password.length < 3){
+                errors.password='Must be 4 characters or more';
+            }
             return errors;
         },
         onSubmit: values => {
@@ -50,12 +55,43 @@ export const Login = () => {
                </FormLabel>
                <form onSubmit={formik.handleSubmit}>
                    <FormGroup>
-                       <TextField label="Email" margin="normal" name="email" onChange={formik.handleChange}
-                           value={formik.values.email} />
-                       <TextField type="password" label="Password" margin="normal" name="password"
-                           onChange={formik.handleChange} value={formik.values.password} />
-                       <FormControlLabel label={'Remember me'} control={<Checkbox onChange={formik.handleChange}
-                           value={formik.values.rememberMe} name="rememberMe" />}
+                       <TextField 
+                            label="Email" 
+                            margin="normal" 
+                            name="email" 
+                            onChange={formik.handleChange}
+                            value={formik.values.email}
+                            onBlur={formik.handleBlur} 
+                       />
+                           {    
+                             formik.touched.email &&
+                             formik.errors.email && 
+                                <div style={{color:'red'}}>
+                                    {formik.errors.email}
+                                </div>
+                            }
+                       <TextField 
+                            type="password" 
+                            label="Password" 
+                            margin="normal" 
+                            name="password"
+                            onChange={formik.handleChange} 
+                            value={formik.values.password} 
+                            onBlur={formik.handleBlur}
+                       />
+                           {
+                            formik.touched.password &&
+                            formik.errors.password && 
+                                <div style={{color:'red'}}>
+                                    {formik.errors.password}
+                                </div>
+                           } 
+                       <FormControlLabel label={'Remember me'} control={<Checkbox 
+                            name="rememberMe"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            checked={formik.values.rememberMe}  
+                            />}
                        />
                        <Button type={'submit'} variant={'contained'} color={'primary'}>
                            Login
