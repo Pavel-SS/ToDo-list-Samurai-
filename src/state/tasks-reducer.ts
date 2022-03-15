@@ -153,7 +153,6 @@ export const addTaskThunkCreator = (title: string, todolistId: string) => (dispa
     todolistsAPI.createTask(todolistId, title).then(res=>{
         dispatch(addTaskAC(res.data.data.item))
     })
-
 }
 
 export const updateTaskThunkCreator = (taskId: string, status: TaskStatuses, todolistId: string) => (dispatch: Dispatch, getState:()=>AppRootStateType) => {
@@ -162,7 +161,6 @@ export const updateTaskThunkCreator = (taskId: string, status: TaskStatuses, tod
         .find(t => {
             return t.id === taskId
         })
-
         if(task){
             const newStatus: UpdateTaskModelType = {
                 title: task?.title,
@@ -174,6 +172,27 @@ export const updateTaskThunkCreator = (taskId: string, status: TaskStatuses, tod
             }
             todolistsAPI.updateTask(todolistId, taskId, newStatus).then(res=> {
                 dispatch(changeTaskStatusAC(taskId, status, todolistId));
+            })
+        }
+}
+
+export const changeTaskTitleThunkCreator = (taskId: string, title: string, todolistId: string) => (dispatch: Dispatch, getState:()=>AppRootStateType) => {
+    const task = getState()
+        .tasks[todolistId]
+        .find(t => {
+            return t.id === taskId
+        })
+        if(task){
+            const newStatus: UpdateTaskModelType = {
+                title: title,
+                description: task?.description,
+                status: task.status,
+                priority: task?.priority,
+                startDate: task?.startDate,
+                deadline: task?.deadline
+            }
+            todolistsAPI.updateTask(todolistId, taskId, newStatus).then(res=> {
+                dispatch(changeTaskTitleAC(taskId, title, todolistId));
             })
         }
 }
