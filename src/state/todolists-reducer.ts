@@ -102,11 +102,26 @@ export const changeTodolistFilterAC = (id: string, filter: FilterValuesType): Ch
     return {type: 'CHANGE-TODOLIST-FILTER', id: id, filter: filter}
 }
 
-export const fetchTodolistsThunkCreator = () => {
-    return (dispatch: Dispatch) => {
+export const fetchTodolistsThunkCreator = () => (dispatch: Dispatch) => {
         todolistsAPI.getTodolists().then(res => {
             dispatch(setTodolistsAC(res.data))
         })
-    }
 }
 
+export const removeTodolistsThunkCreator = (todolistId: string) => (dispatch: Dispatch) => {
+    todolistsAPI.deleteTodolist(todolistId).then(res => {
+        dispatch(removeTodolistAC(todolistId))
+    })
+}
+
+export const addTodolistThunkCreator = (title:string) => (dispatch:Dispatch) => {
+    todolistsAPI.createTodolist(title).then(res => {
+        dispatch(addTodolistAC(title))
+    })
+}
+
+export const changeTodolistTitleThunkCreator = (todolistId:string, title: string) => (dispatch:Dispatch) => {
+    todolistsAPI.updateTodolist(todolistId, title).then(res => {
+        dispatch(changeTodolistTitleAC(todolistId, title))
+    })
+}
