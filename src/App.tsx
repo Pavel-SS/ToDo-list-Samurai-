@@ -13,11 +13,14 @@ import Paper from '@mui/material/Paper';
 import { Menu } from '@mui/icons-material';
 import {
     addTodolistAC,
+    addTodolistThunkCreator,
     changeTodolistFilterAC,
     changeTodolistTitleAC,
+    changeTodolistTitleThunkCreator,
     fetchTodolistsThunkCreator,
     FilterValuesType,
     removeTodolistAC,
+    removeTodolistsThunkCreator,
     setTodolistsAC,
     TodolistDomainType
 } from './state/todolists-reducer'
@@ -68,18 +71,18 @@ function App() {
     }, []);
 
     const removeTodolist = useCallback(function (id: string) {
-        const action = removeTodolistAC(id);
-        dispatch(action);
+        const thunk = removeTodolistsThunkCreator(id);
+        dispatch(thunk);
     }, []);
 
     const changeTodolistTitle = useCallback(function (id: string, title: string) {
-        const action = changeTodolistTitleAC(id, title);
-        dispatch(action);
+        const thunk = changeTodolistTitleThunkCreator(id, title);
+        dispatch(thunk);
     }, []);
 
     const addTodolist = useCallback((title: string) => {
-        const action = addTodolistAC(title);
-        dispatch(action);
+        const thunk = addTodolistThunkCreator(title);
+        dispatch(thunk);
     }, [dispatch]);
 
     return (
