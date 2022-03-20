@@ -14,7 +14,7 @@ import Container from '@mui/material/Container';
 import { Menu } from '@mui/icons-material';
 import { RequestStatusType } from './app-reducer';
 import { useAppSelector } from './store';
-
+import { ErrorSnackbar } from '../components/ErrorSnackbar/ErrorSnackbar'
 
 function App() {
 
@@ -35,11 +35,12 @@ function App() {
                     </Typography>
                     <Button color="inherit">Login</Button>
                 </Toolbar>
-                {status === 'idle' && <LinearProgress color='secondary'/>}
+                {status === 'loading' && <LinearProgress color='secondary'/>}
             </AppBar>
             <Container fixed>
                 <TodolistsList/>
             </Container>
+            <ErrorSnackbar/>
         </div>
     )
 }
