@@ -11,10 +11,13 @@ const instance = axios.create({
 // auth-api
 export const authAPI = {
     me(){
-        return instance.get<ResponseType<{id:number,email:string,login:string}>>('/auth/me')
+        return instance.get<ResponseType<{me: MeParamsType}>>('/auth/me')
     },
     login(data: LogginParamsType){
         return instance.post<LogginParamsType, AxiosResponse<ResponseType<{userId: string}>>>('/auth/login', data)
+    },
+    logout(){
+        return instance.delete<ResponseType>('/auth/login')
     }
 } 
 // api
@@ -64,7 +67,11 @@ export type LogginParamsType = {
     rememberMe?: boolean
     captcha?: string
 }
-
+export type MeParamsType = {
+    id:number,
+    email:string,
+    login:string
+}
 export enum TaskStatuses {
     New = 0,
     InProgress = 1,
