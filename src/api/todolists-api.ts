@@ -8,6 +8,15 @@ const instance = axios.create({
     }
 })
 
+// auth-api
+export const authAPI = {
+    me(){
+        return instance.get<ResponseType<{id:number,email:string,login:string}>>('/auth/me')
+    },
+    login(data: LogginParamsType){
+        return instance.post<LogginParamsType, AxiosResponse<ResponseType<{userId: string}>>>('/auth/login', data)
+    }
+} 
 // api
 export const todolistsAPI = {
     getTodolists() {
@@ -49,7 +58,12 @@ export type ResponseType<D = {}> = {
     fieldsErrors: Array<string>
     data: D
 }
-
+export type LogginParamsType = {
+    email:string
+    password: string
+    rememberMe?: boolean
+    captcha?: string
+}
 
 export enum TaskStatuses {
     New = 0,
