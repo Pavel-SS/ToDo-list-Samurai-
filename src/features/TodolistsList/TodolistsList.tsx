@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppRootStateType, useAppSelector } from '../../app/store';
+import { useDispatch } from 'react-redux';
+import {  useAppSelector } from '../../app/store';
 import { Navigate } from 'react-router-dom';
 import {
     addTodolistTC,
@@ -9,9 +9,8 @@ import {
     fetchTodolistsTC,
     FilterValuesType,
     removeTodolistTC,
-    TodolistDomainType
 } from './todolists-reducer'
-import { addTaskTC, removeTaskTC, TasksStateType, updateTaskTC } from './tasks-reducer'
+import { addTaskTC, removeTaskTC, updateTaskTC } from './tasks-reducer'
 import { TaskStatuses } from '../../api/todolists-api'
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
@@ -31,7 +30,7 @@ export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
 
     useEffect(() => {
         if (!isLoggedIn) {
-            return;
+            return
         }
         const thunk = fetchTodolistsTC()
         dispatch(thunk)

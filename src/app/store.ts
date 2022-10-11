@@ -1,7 +1,7 @@
 import { tasksReducer } from '../features/TodolistsList/tasks-reducer';
 import { todolistsReducer } from '../features/TodolistsList/todolists-reducer';
 import { applyMiddleware, combineReducers, createStore } from 'redux'
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
+import { TypedUseSelectorHook, useSelector } from 'react-redux'
 import thunkMiddleware from 'redux-thunk'
 import { appReducer } from './app-reducer'
 import { authReducer } from '../features/TodolistsList/Login/auth-reducer';
