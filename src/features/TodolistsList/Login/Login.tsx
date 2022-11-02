@@ -40,7 +40,7 @@ export const Login = () => {
             }
             if(!values.password) {
                 errors.password = 'Required password'
-            } else if (!/^[a-z0-9A-Z]{8}/i.test(values.password)){
+            } else if (!/^[a-z0-9A-Z]{4}/i.test(values.password)){
                 errors.password = 'Invalid password address'
             }
             return errors
